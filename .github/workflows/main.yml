@@ -52,6 +52,6 @@ jobs:
         id: plan
         run: terraform plan 
 
-      # 8️⃣ Terraform Apply (optional for PRs)..
+      # 8️⃣ Terraform Apply (optional for PRs)
       - name: Terraform Apply
         run: terraform apply --auto-approve
