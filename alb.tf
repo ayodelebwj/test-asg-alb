@@ -1,5 +1,5 @@
 resource "aws_lb" "frontend_alb" {
-  name               = "frontend_alb"
+  name               = "frontend-alb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
@@ -9,6 +9,6 @@ resource "aws_lb" "frontend_alb" {
   ]
 
   tags = {
-    Name = "frontend_alb"
+    Name = "frontend-alb"
   }
 }
