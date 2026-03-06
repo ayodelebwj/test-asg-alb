@@ -7,9 +7,6 @@ resource "aws_launch_template" "frontend_lt" {
   vpc_security_group_ids = [
     aws_security_group.frontend_sg.id
   ]
-
-  user_data = file("${path.module}/frontend_user_data.sh")
-
   tag_specifications {
     resource_type = "instance"
 
