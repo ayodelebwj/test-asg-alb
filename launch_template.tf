@@ -8,12 +8,12 @@ resource "aws_launch_template" "frontend_lt" {
   ]
 
   user_data = <<-EOF
-              #!/bin/bash
-              sudo apt update -y
-              sudo apt install nginx -y
-              sudo systemctl start nginx
-              sudo systemctl enable nginx
-              EOF
+      #!/bin/bash
+      sudo apt update -y
+      sudo apt install nginx -y
+      sudo systemctl start nginx
+      sudo systemctl enable nginx
+  EOF
   tag_specifications {
     resource_type = "instance"
 
