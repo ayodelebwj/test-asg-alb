@@ -1,4 +1,4 @@
-resource "aws_instance" "frontend_az_1" {
+/*esource "aws_instance" "frontend_az_1" {
   ami           = "ami-0b6c6ebed2801a5cb"  # Replace with the correct AMI ID for your region
   instance_type = "t2.micro"
   key_name      = "office-kp"            # Optional: for SSH access
@@ -26,4 +26,4 @@ resource "aws_instance" "frontend_az_2" {
   tags = {
     Name = "frontend-ec2"
   }
-}
+}*/
