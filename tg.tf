@@ -1,5 +1,4 @@
 resource "aws_lb_target_group" "frontend_tg" {
-<<<<<<< HEAD
   name     = "frontend-tg"
   port     = 80
   protocol = "HTTP"
