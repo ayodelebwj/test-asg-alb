@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 resource "aws_lb" "app_lb" {
   name               = "my-alb"
   load_balancer_type = "application"
