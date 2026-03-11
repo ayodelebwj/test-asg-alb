@@ -12,7 +12,7 @@ resource "aws_lb_target_group" "frontend_tg" {
     unhealthy_threshold = 2
     matcher             = "200"
   }
-    target_type = "instance"
+  target_type = "instance"
 
   tags = {
     Name = "frontend-target-group"

@@ -30,8 +30,8 @@ resource "aws_security_group" "alb_sg" {
   }
   tags = {
     Name = "alb-security-group"
-    }
   }
+}
 
 resource "aws_security_group" "frontend_ec2_sg" {
   name        = "frontend-ec2-sg"
@@ -62,6 +62,42 @@ resource "aws_security_group" "frontend_ec2_sg" {
   }
   tags = {
     Name = "frontend-security-group"
+  }
+}
+
+
+
+
+
+resource "aws_security_group" "backendec2_sg" {
+  name        = "backend-ec2-sg"
+  description = "Allow traffic from ALB to backend EC2"
+  vpc_id      = data.aws_vpc.main.id
+
+  ingress {
+    description     = "Allow HTTP from ALB"
+    from_port       = 8000
+    to_port         = 8000
+    protocol        = "tcp"
+    security_groups = [aws_security_group.frontend_ec2_sg.id]
+  }
+
+  ingress {
+    description = "Allow SSH from admin"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "backend-security-group"
   }
 }
 

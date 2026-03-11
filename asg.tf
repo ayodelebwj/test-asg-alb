@@ -1,9 +1,9 @@
 resource "aws_autoscaling_group" "frontend_asg" {
-  name                      = "frontend-asg"
-  max_size                  = 2
-  min_size                  = 1
-  desired_capacity          = 2
-  vpc_zone_identifier       = [data.aws_subnet.public_subnet.id, data.aws_subnet.public_subnet_2.id]
+  name                = "frontend-asg"
+  max_size            = 2
+  min_size            = 1
+  desired_capacity    = 2
+  vpc_zone_identifier = [data.aws_subnet.public_subnet.id, data.aws_subnet.public_subnet_2.id]
   launch_template {
     id      = aws_launch_template.frontend_lt.id
     version = "$Latest"
@@ -11,8 +11,8 @@ resource "aws_autoscaling_group" "frontend_asg" {
 
   target_group_arns = [aws_lb_target_group.frontend_tg.arn]
 
-  health_check_type          = "ELB"
-  health_check_grace_period  = 300
+  health_check_type         = "ELB"
+  health_check_grace_period = 300
 
   tag {
     key                 = "Name"

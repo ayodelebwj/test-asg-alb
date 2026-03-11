@@ -17,17 +17,17 @@ jobs:
       AWS_REGION: us-east-1
 
     steps:
-      # 1️⃣ Checkout repo
+      # Checkout repo
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 2️⃣ Setup Terraform
+      # Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.6.4
 
-      # 3️⃣ Configure AWS credentials
+      # Configure AWS credentials
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -35,23 +35,23 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      # 4️⃣ Terraform Init
+      # Terraform Init
       - name: Terraform Init
         run: terraform init 
 
-      # 5️⃣ Terraform Format Check
+      # Terraform Format Check
       - name: Terraform Format
         run: terraform fmt 
 
-      # 6️⃣ Terraform Validate
+      # Terraform Validate
       - name: Terraform Validate
         run: terraform validate
 
-      # 7️⃣ Terraform Plan.
+      # Terraform Plan.
       - name: Terraform Plan
         id: plan
         run: terraform plan 
 
-      # 8️⃣ Terraform Apply (optional for PRs)
+      # Terraform Apply (optional for PRs)
       - name: Terraform Apply
         run: terraform apply --auto-approve
