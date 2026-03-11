@@ -19,7 +19,7 @@ resource "aws_lb_target_group" "frontend_tg" {
   }
 }
 
-resource "aws_lb_target_group_attachment" "frontend_ec2" {
+/*resource "aws_lb_target_group_attachment" "frontend_ec2" {
   target_group_arn = aws_lb_target_group.frontend_tg.arn
   target_id        = aws_instance.frontend_az_2.id
   port             = 80
@@ -29,4 +29,4 @@ resource "aws_lb_target_group_attachment" "frontend_ec1" {
   target_group_arn = aws_lb_target_group.frontend_tg.arn
   target_id        = aws_instance.frontend_az_1.id
   port             = 80
-}
+}*/
