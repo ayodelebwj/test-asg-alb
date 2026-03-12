@@ -46,6 +46,14 @@ resource "aws_security_group" "frontend_ec2_sg" {
     security_groups = [aws_security_group.alb_sg.id]
   }
 
+    ingress {
+    description     = "Allow HTTP from ALB"
+    from_port       = 443
+    to_port         = 443
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]
+  }
+
   ingress {
     description = "Allow SSH from admin"
     from_port   = 22
@@ -67,9 +75,40 @@ resource "aws_security_group" "frontend_ec2_sg" {
 
 
 
+resource "aws_security_group" "backend_alb_sg" {
+  name        = "backend-alb-security-group"
+  description = "Allow FRONTEND TRAFFIC to ALB"
+  vpc_id      = data.aws_vpc.main.id
 
+  ingress {
+    description = "HTTPS from FRONTEND"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    security_groups = [aws_security_group.frontend_ec2_sg.id]
+  }
+  ingress {
+    description = "HTTPS from FRONTEND"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    security_groups = [aws_security_group.frontend_ec2_sg.id]
+  }
 
-resource "aws_security_group" "backendec2_sg" {
+  egress {
+    description = "Allow outbound traffic"
+
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "backend-alb-security-group"
+  }
+}
+
+resource "aws_security_group" "backend_ec2_sg" {
   name        = "backend-ec2-sg"
   description = "Allow traffic from ALB to backend EC2"
   vpc_id      = data.aws_vpc.main.id
@@ -79,7 +118,7 @@ resource "aws_security_group" "backendec2_sg" {
     from_port       = 8000
     to_port         = 8000
     protocol        = "tcp"
-    security_groups = [aws_security_group.frontend_ec2_sg.id]
+    security_groups = [aws_security_group.backend_alb_sg.id]
   }
 
   ingress {
@@ -88,6 +127,7 @@ resource "aws_security_group" "backendec2_sg" {
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [aws_security_group.frontend_ec2_sg.id]
   }
 
   egress {
