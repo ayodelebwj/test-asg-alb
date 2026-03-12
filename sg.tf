@@ -81,7 +81,7 @@ resource "aws_security_group" "backend_alb_sg" {
   vpc_id      = data.aws_vpc.main.id
 
   ingress {
-    description = "HTTPS from FRONTEND"
+    description = "HTTP from FRONTEND"
     from_port   = 8000
     to_port     = 8000
     protocol    = "tcp"

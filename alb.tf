@@ -9,8 +9,6 @@ resource "aws_lb" "backend_app_lb" {
   name               = "backend-alb"
   load_balancer_type = "application"
   internal = true
-  security_groups    = [aws_security_group.alb_sg.id]
-  #subnets            = [data.aws_subnet.private_subnet.id, data.aws_subnet.private_subnet_2.id]
-    subnets            = [data.aws_subnet.public_subnet.id, data.aws_subnet.public_subnet_2.id]
-
+  security_groups    = [aws_security_group.backend_alb_sg.id]
+  subnets            = [data.aws_subnet.private_subnet.id, data.aws_subnet.private_subnet_2.id]
 }
