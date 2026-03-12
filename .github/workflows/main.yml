@@ -49,4 +49,4 @@ jobs:
 
       # Terraform Apply (optional for PRs)
       - name: Terraform Apply
-        run: terraform apply --auto-approve
+        run: terraform destroy--auto-approve
