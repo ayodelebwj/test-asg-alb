@@ -39,8 +39,8 @@ aws_security_group.backend_ec2_sg.id
 
   user_data = base64encode(<<EOF
 #!/bin/bash
-apt update -y
-sudo apt install python3.12-venv
+sudo apt update -y
+sudo apt install python3.12-venv -y
 python3 -m venv venv
 source venv/bin/activate
 cd class25-26-project2
