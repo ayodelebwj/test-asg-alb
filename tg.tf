@@ -27,6 +27,8 @@ resource "aws_lb_target_group" "backend_tg" {
 
   health_check {
     path                = "/healthz"
+      port     = "8000"
+  protocol = "HTTP"
     interval            = 30
     timeout             = 5
     healthy_threshold   = 2
@@ -39,9 +41,6 @@ resource "aws_lb_target_group" "backend_tg" {
     Name = "backend-target-group"
   }
 }
-
-
-
 
 
 
