@@ -12,7 +12,7 @@ resource "aws_lb_listener" "http" {
 
 resource "aws_lb_listener" "internal_listener" {
   load_balancer_arn = aws_lb.backend_app_lb.arn
-  port              = 443
+  port              = 8000
   protocol          = "HTTP"
 
   default_action {

@@ -47,11 +47,6 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      # Terraform Plan.
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan 
-
       # Terraform Apply (optional for PRs)
       - name: Terraform Apply
         run: terraform apply --auto-approve
