@@ -28,11 +28,11 @@ resource "aws_autoscaling_group" "backend_asg" {
   desired_capacity    = 2
   vpc_zone_identifier = [data.aws_subnet.private_subnet.id, data.aws_subnet.private_subnet_2.id]
   launch_template {
-    id      = aws_launch_template.frontend_lt.id
+    id      = aws_launch_template.backend_lt.id
     version = "$Latest"
   }
 
-  target_group_arns = [aws_security_group.backend_alb_sg.arn]
+  target_group_arns = [aws_lb_target_group.backend_tg.arn]
 
   health_check_type         = "ELB"
   health_check_grace_period = 300
