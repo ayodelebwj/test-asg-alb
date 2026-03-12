@@ -32,7 +32,7 @@ resource "aws_autoscaling_group" "backend_asg" {
     version = "$Latest"
   }
 
-  target_group_arns = [aws_lb_target_group.backend_tg.arn]
+  target_group_arns = [aws_security_group.backend_alb_sg.arn]
 
   health_check_type         = "ELB"
   health_check_grace_period = 300
