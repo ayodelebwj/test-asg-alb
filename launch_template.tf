@@ -37,23 +37,27 @@ resource "aws_launch_template" "backend_lt" {
 aws_security_group.backend_ec2_sg.id
   ]
 
-  user_data = base64encode(<<EOF
+user_data = base64encode(<<EOF
 #!/bin/bash
+
 # install python and dependencies
-sudo apt update -y
-sudo apt install -y python3.12-venv python3-pip git
-git clone https://github.com/techbleat/class25-26-project2.git
-# create virtual environment
+apt update -y
+apt install -y python3.12-venv python3-pip git
+
+# clone repo
 cd /home/ubuntu
-python3 -m venv class25-26-project2/venv
+git clone https://github.com/techbleat/class25-26-project2.git
+
+# create virtual environment
+python3 -m venv /home/ubuntu/class25-26-project2/venv
 
 # activate venv and install requirements
-source class25-26-project2/venv/bin/activate
-cd class25-26-project2
+source /home/ubuntu/class25-26-project2/venv/bin/activate
+cd /home/ubuntu/class25-26-project2
 pip install -r requirements.txt
 
 # create systemd service
-cat <<EOF | sudo tee /etc/systemd/system/backend-app.service
+cat <<EOT | tee /etc/systemd/system/backend-app.service
 [Unit]
 Description=Backend FastAPI App
 After=network.target
@@ -69,14 +73,16 @@ RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
+EOT
 
 # reload systemd and start service
-sudo systemctl daemon-reload
-sudo systemctl enable backend-app
-sudo systemctl start backend-app
-EOF
+systemctl daemon-reload
+systemctl enable backend-app
+systemctl start backend-app
 
-  )
+EOF
+)
+
   tag_specifications {
     resource_type = "instance"
 

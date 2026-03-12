@@ -2,7 +2,7 @@ resource "aws_autoscaling_group" "frontend_asg" {
   name                = "frontend-asg"
   max_size            = 2
   min_size            = 1
-  desired_capacity    = 2
+  desired_capacity    = 1
   vpc_zone_identifier = [data.aws_subnet.public_subnet.id, data.aws_subnet.public_subnet_2.id]
   launch_template {
     id      = aws_launch_template.frontend_lt.id
