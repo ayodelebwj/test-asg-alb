@@ -73,8 +73,6 @@ resource "aws_security_group" "frontend_ec2_sg" {
   }
 }
 
-
-
 resource "aws_security_group" "backend_alb_sg" {
   name        = "backend-alb-security-group"
   description = "Allow FRONTEND TRAFFIC to ALB"
