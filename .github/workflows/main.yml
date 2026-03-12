@@ -43,7 +43,7 @@ jobs:
       - name: Terraform Format
         run: terraform fmt 
 
-      # Terraform Validate
+      # Terraform Validate.
       - name: Terraform Validate
         run: terraform validate
 
