@@ -69,4 +69,7 @@ jobs:
 
       - name: Output inventory graph
         run: ansible-inventory -i aws_ec2.yml --graph
+
+      - name: Output inventory graph
+        run: cat aws_ec2.yml 
       
