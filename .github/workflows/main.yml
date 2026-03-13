@@ -109,6 +109,6 @@ jobs:
          role-to-assume: ${{ needs.terraform.outputs.role_arn }}
          aws-region: us-east-1
 
-      - name: Output inventory graph
+      - name: run ansible playbook
         run: ansible-playbook -i aws_ec2.yml ping.yml
       

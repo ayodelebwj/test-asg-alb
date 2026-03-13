@@ -12,4 +12,7 @@ keyed_groups:
 
 hostnames:
   - private-ip-address
-  
+
+compose:
+  ansible_connection: aws_ssm
+  ansible_region: us-east-1  
