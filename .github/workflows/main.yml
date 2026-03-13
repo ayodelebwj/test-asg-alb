@@ -57,16 +57,16 @@ jobs:
       - name: Output tf.json
         run: cat tf_output.json
 
-      - name: Generate Ansible inventory using jq
+      - name: Install Ansible and AWS dependencies
         run: |
-          # Frontend (empty for now, or add actual frontend output if exists)
-          echo "[backend_instance_id]" > inventory.ini
-          jq -r '.backend_instance_ids.value[]' tf_output.json >> inventory.ini
+          sudo apt update
+          sudo apt install ansible -y
+          pip3 install boto3 botocore
+          ansible-galaxy collection install amazon.aws
 
-          echo "" >> inventory.ini
-          # Backend
-          echo "[backend_private_ip]" >> inventory.ini
-          jq -r '.backend_private_ips.value[]' tf_output.json >> inventory.ini
+      - name: test aws ec2 plugin
+        run: ansible-doc -t inventory amazon.aws.aws_ec2
 
-      - name: Show inventory file
-        run: cat inventory.ini
+      - name: Output inventory graph
+        run: ansible-inventory -i aws_ec2.yml --graph
+      
