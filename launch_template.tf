@@ -90,31 +90,6 @@ sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
 iam_instance_profile   = aws_iam_instance_profile.ssm_profile.name
 EOF
 )
-
-resource "aws_instance" "example" {
-  ami           = "ami-12345678"
-  instance_type = "t3.micro"
-  iam_instance_profile = aws_iam_instance_profile.ssm_profile.name
-
-  # Optional tags, etc.
-  tags = {
-    Name = "SSM-Test-Instance"
-  }
-
-
-  provisioner "remote-exec" {
-    inline = [
-      "echo Hello from SSM > /tmp/hello.txt"
-    ]
-
-    connection {
-      type   = "ssm"
-      host   = self.id       # <-- EC2 instance ID
-      region = "us-east-1"
-    }
-  }
-}
-
   tag_specifications {
     resource_type = "instance"
 
