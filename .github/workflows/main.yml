@@ -59,9 +59,9 @@ jobs:
 
       - name: Install Ansible and AWS dependencies
         run: |
-          sudo apt update
-          sudo apt install ansible -y
-          pip3 install boto3 botocore
+          sudo apt update -y
+          sudo apt install python3-pip -y
+          pip3 install ansible boto3 botocore
           ansible-galaxy collection install amazon.aws
 
       - name: test aws ec2 plugin
