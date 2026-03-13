@@ -58,7 +58,8 @@ jobs:
         run: |
           python3 - <<EOF
           import json
-          tf = json.load(open('tf_output.json'))
+          with open('inventory.ini', 'w') as f:
+              tf = json.load(open('tf_output.json'))
           with open('inventory.ini', 'w') as f:
               f.write('[frontend]\n')
               for ip in tf['frontend_private_ips']['value']:
@@ -67,3 +68,6 @@ jobs:
               for ip in tf['backend_private_ips']['value']:
                   f.write(f'{ip}\n')
           EOF
+
+      - name: Show inventory file
+        run: cat inventory.ini
