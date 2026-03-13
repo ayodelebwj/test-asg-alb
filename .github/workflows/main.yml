@@ -60,7 +60,7 @@ jobs:
       - name: Generate Ansible inventory using jq
         run: |
           echo "[frontend]" > inventory.ini
-          terraform output -json frontend_private_ips | jq -r '.value[]' >> inventory.ini
+          terraform output -json backend_instance_ids | jq -r '.value[]' >> inventory.ini
           echo "" >> inventory.ini
           echo "[backend]" >> inventory.ini
           terraform output -json backend_private_ips | jq -r '.value[]' >> inventory.ini
