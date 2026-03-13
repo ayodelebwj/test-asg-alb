@@ -88,6 +88,7 @@ sudo snap install amazon-ssm-agent --classic
 sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
 iam_instance_profile   = aws_iam_instance_profile.ssm_profile.name
+chown ubuntu:ubuntu /home/ubuntu/class25-26-project2
 EOF
 )
   tag_specifications {
