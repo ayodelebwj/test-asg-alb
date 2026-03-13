@@ -1,7 +1,6 @@
 ---
 - name: Test connectivity to all hosts
   hosts: all
-  region: us-east-1
   gather_facts: no
 
   tasks:
