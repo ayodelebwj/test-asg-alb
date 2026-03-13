@@ -55,7 +55,7 @@ jobs:
 
       # Terraform Apply (optional for PRs)
       - name: Terraform Apply
-        run: terraform apply--auto-approve
+        run: terraform apply --auto-approve
 
       - name: Get Terraform Output
         run: terraform output -json > tf_output.json
