@@ -49,25 +49,21 @@ jobs:
 
       # Terraform Apply (optional for PRs)
       - name: Terraform Apply
-        run: terraform destroy --auto-approve
+        run: terraform apply --auto-approve
 
       - name: Get Terraform Output
         run: terraform output -json > tf_output.json
 
-      - name: Generate Ansible inventory from Terraform
+      - name: Output tf.json
+        run: cat tf_output.json
+
+      - name: Generate Ansible inventory using jq
         run: |
-          python3 - <<EOF
-          import json
-          with open('inventory.ini', 'w') as f:
-              tf = json.load(open('tf_output.json'))
-          with open('inventory.ini', 'w') as f:
-              f.write('[frontend]\n')
-              for ip in tf['frontend_private_ips']['value']:
-                  f.write(f'{ip}\n')
-              f.write('\n[backend]\n')
-              for ip in tf['backend_private_ips']['value']:
-                  f.write(f'{ip}\n')
-          EOF
+          echo "[frontend]" > inventory.ini
+          terraform output -json frontend_private_ips | jq -r '.value[]' >> inventory.ini
+          echo "" >> inventory.ini
+          echo "[backend]" >> inventory.ini
+          terraform output -json backend_private_ips | jq -r '.value[]' >> inventory.ini
 
       - name: Show inventory file
         run: cat inventory.ini
