@@ -50,3 +50,20 @@ jobs:
       # Terraform Apply (optional for PRs)
       - name: Terraform Apply
         run: terraform apply --auto-approve
+
+      - name: Get Terraform Output
+        run: terraform output -json > tf_output.json
+
+      - name: Generate Ansible inventory from Terraform
+        run: |
+          python3 - <<EOF
+          import json
+          tf = json.load(open('tf_output.json'))
+          with open('inventory.ini', 'w') as f:
+              f.write('[frontend]\n')
+              for ip in tf['frontend_private_ips']['value']:
+                  f.write(f'{ip}\n')
+              f.write('\n[backend]\n')
+              for ip in tf['backend_private_ips']['value']:
+                  f.write(f'{ip}\n')
+          EOF
