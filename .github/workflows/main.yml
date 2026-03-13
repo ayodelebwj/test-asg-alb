@@ -64,7 +64,6 @@ jobs:
         run: cat tf_output.json
          
       - name: Get Role ARN Output
-        working-directory: terraform
         id: tf
         run: 
           echo "role_arn=$(terraform output -raw github_actions_role)" >> $GITHUB_OUTPUT
