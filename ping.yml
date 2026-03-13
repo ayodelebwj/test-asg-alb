@@ -1,6 +1,7 @@
 ---
 - name: Test connectivity to all hosts
   hosts: all
+  remote_user: ubuntu
   gather_facts: no
 
   tasks:
