@@ -14,6 +14,11 @@ apt install -y nginx
 systemctl start nginx
 systemctl enable nginx
 echo "OK" > /var/www/html/health
+sudo snap install amazon-ssm-agent --classic
+sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
+sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
+iam_instance_profile   = aws_iam_instance_profile.ssm_profile.name
+
 EOF
   )
   tag_specifications {
@@ -79,7 +84,10 @@ EOT
 systemctl daemon-reload
 systemctl enable backend-app
 systemctl start backend-app
-
+sudo snap install amazon-ssm-agent --classic
+sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
+sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
+iam_instance_profile   = aws_iam_instance_profile.ssm_profile.name
 EOF
 )
 
