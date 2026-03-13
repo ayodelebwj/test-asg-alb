@@ -110,5 +110,5 @@ jobs:
          aws-region: us-east-1
 
       - name: run ansible playbook
-        run: ansible-playbook -i aws_ec2.yml ping.yml
+        run: ansible-playbook -i aws_ec2.yml ping.yml -vvv
       
