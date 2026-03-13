@@ -15,4 +15,4 @@ hostnames:
 
 compose:
   ansible_connection: aws_ssm
-  ansible_region: us-east-1  
+  ansible_region: region
