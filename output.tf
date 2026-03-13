@@ -1,7 +1,7 @@
 output "backend_private_ips" {
-  value = aws_autoscaling_group.backend_asg.instances[*].private_ip
+  value = data.aws_instances.backend_asg_instances.private_ips
 }
 
 output "backend_instance_ids" {
-  value = aws_autoscaling_group.backend_asg.instances[*].id
+  value = data.aws_instances.backend_asg_instances.ids
 }
