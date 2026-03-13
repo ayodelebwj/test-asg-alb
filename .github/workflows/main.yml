@@ -71,5 +71,5 @@ jobs:
         run: ansible-inventory -i aws_ec2.yml --graph
 
       - name: Output inventory graph
-        run: cat aws_ec2.yml 
+        run: ansible-playbook -i aws_ec2.yml ping.yml
       
