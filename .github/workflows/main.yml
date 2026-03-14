@@ -109,6 +109,9 @@ jobs:
       - name: Output inventory graph
         run: ansible-inventory -i aws_ec2.yml --graph
 
+      - name: Debug role ARN
+        run: echo "Role ARN = ${{ needs.terraform.outputs.role_arn }}"
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
