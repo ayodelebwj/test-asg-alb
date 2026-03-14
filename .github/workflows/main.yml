@@ -65,7 +65,7 @@ jobs:
          
       - name: Get Role ARN Output
         id: tf
-        run: |
+        run: 
           echo "role_arn=$(terraform output -raw github_actions_role)" >> $GITHUB_OUTPUT
 
       - name: Debug Role ARN
