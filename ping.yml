@@ -5,5 +5,14 @@
   gather_facts: yes
 
   tasks:
-    - name: Ping hosts
-      ansible.builtin.ping:
+
+    - name: Ensure /home/ubuntu/mydir exists
+      ansible.builtin.file:
+        path: /home/ubuntu/mydir    # <-- change this path to whatever directory you want
+        state: directory
+        mode: '0755'                # permissions
+        owner: ubuntu
+        group: ubuntu
+        
+    - name: Raw echo test
+      ansible.builtin.raw: echo "OK"
