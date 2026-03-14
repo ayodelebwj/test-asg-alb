@@ -5,14 +5,13 @@
   gather_facts: yes
 
   tasks:
-
-    - name: Ensure /home/ubuntu/mydir exists
+    - name: Create home directory if missing
       ansible.builtin.file:
-        path: /home/ubuntu/mydir    # <-- change this path to whatever directory you want
+        path: /home/ubuntu
         state: directory
-        mode: '0755'                # permissions
         owner: ubuntu
         group: ubuntu
-        
+        mode: '0755'
+
     - name: Raw echo test
       ansible.builtin.raw: echo "OK"
