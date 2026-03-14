@@ -142,15 +142,9 @@ resource "aws_iam_policy" "github_actions_ec2_policy" {
           "ssm:SendCommand",
           "ssm:TerminateSession",
           "ssm:GetCommandInvocation",
-          "ssm:ListCommandInvocations"
-        ],
-        Resource = "*"
-      },
-      {
-        Effect = "Allow",
-        Action = [
-          "ssm:SendCommand",
-          "ssm:GetCommandInvocation"
+          "ssm:ListCommandInvocations",
+          "ssm:GetDocument",
+          "ssm:ListDocuments"
         ],
         Resource = "*"
       }

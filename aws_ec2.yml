@@ -5,6 +5,9 @@ regions:
 
 filters:
   instance-state-name: running
+  tag:aws:autoscaling:frontend_asg: frontend-asg
+  tag:aws:autoscaling:backend_asg: backend_asg
+
 
 keyed_groups:
   - key: tags.Role
