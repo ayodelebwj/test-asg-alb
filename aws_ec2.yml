@@ -8,8 +8,7 @@ filters:
 
 
 keyed_groups:
-  - key: tags.aws:autoscaling:groupName
-    prefix: asg
+
   - key: tags.Role
     prefix: role
 
