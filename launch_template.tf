@@ -4,13 +4,17 @@ resource "aws_launch_template" "frontend_lt" {
   instance_type = "t2.micro"
   key_name      = "myjob744-kp"
 
+  iam_instance_profile   { 
+    name = aws_iam_instance_profile.ssm_profile.name
+    }
+
   vpc_security_group_ids = [
     aws_security_group.frontend_ec2_sg.id
   ]
+
   user_data = base64encode(<<EOF
 #!/bin/bash
 apt update -y
-apt install -y python3
 apt install -y nginx
 systemctl start nginx
 systemctl enable nginx
@@ -18,10 +22,9 @@ echo "OK" > /var/www/html/health
 sudo snap install amazon-ssm-agent --classic
 sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
-iam_instance_profile   = aws_iam_instance_profile.ssm_profile.name
-
 EOF
   )
+  
   tag_specifications {
     resource_type = "instance"
 
@@ -38,6 +41,10 @@ resource "aws_launch_template" "backend_lt" {
   image_id      = "ami-0b6c6ebed2801a5cb"
   instance_type = "t2.micro"
   key_name      = "myjob744-kp"
+  
+  iam_instance_profile   { 
+    name = aws_iam_instance_profile.ssm_profile.name
+    }
 
   vpc_security_group_ids = [
 aws_security_group.backend_ec2_sg.id
@@ -48,12 +55,13 @@ user_data = base64encode(<<EOF
 
 # install python and dependencies
 apt update -y
-apt install -y python3
 apt install -y python3.12-venv python3-pip git
 
 # clone repo
 cd /home/ubuntu
 git clone https://github.com/techbleat/class25-26-project2.git
+chown ubuntu:ubuntu /home/ubuntu/class25-26-project2
+
 
 # create virtual environment
 python3 -m venv /home/ubuntu/class25-26-project2/venv
@@ -89,8 +97,6 @@ systemctl start backend-app
 sudo snap install amazon-ssm-agent --classic
 sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
-iam_instance_profile   = aws_iam_instance_profile.ssm_profile.name
-chown ubuntu:ubuntu /home/ubuntu/class25-26-project2
 EOF
 )
   tag_specifications {
