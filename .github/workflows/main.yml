@@ -70,7 +70,7 @@ jobs:
           echo "role_arn=${ROLE_ARN}" >> $GITHUB_OUTPUT
 
       - name: Debug Role ARN
-        run: echo "Role ARN = ${{ steps.tf.outputs.role_arn }}"
+        run: echo "Role_ARN = ${{ steps.tf.outputs.role_arn }}"
 
   ansible_configuration:
     runs-on: ubuntu-latest
