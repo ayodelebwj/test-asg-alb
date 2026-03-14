@@ -4,7 +4,6 @@ regions:
   - us-east-1
 
 filters:
-  tag:Role: backend
   instance-state-name: running
 
 keyed_groups:

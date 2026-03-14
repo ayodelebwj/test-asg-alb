@@ -107,9 +107,17 @@ resource "aws_iam_policy" "github_actions_ec2_policy" {
           "ec2:TerminateInstances",
           "ec2:StartInstances",
           "ec2:StopInstances",
+          "ec2:DescribeInstances",
+          "ec2:DescribeTags",
+          "ec2:DescribeSecurityGroups",
+          "ec2:DescribeNetworkInterfaces",
+          "ec2:DescribeSubnets",
+          "ec2:DescribeVpcs",
           "ec2:DescribeTags"
         ]
-        Resource = "arn:aws:ec2:us-east-1:380029909039:instance/*"
+        #Resource = "arn:aws:ec2:us-east-1:380029909039:instance/*"
+        Resource = "*"
+
       },
       {
         "Effect": "Allow",
@@ -132,7 +140,9 @@ resource "aws_iam_policy" "github_actions_ec2_policy" {
           "ssm:GetConnectionStatus",
           "ssm:DescribeSessions",
           "ssm:SendCommand",
-          "ssm:TerminateSession"
+          "ssm:TerminateSession",
+          "ssm:GetCommandInvocation",
+          "ssm:ListCommandInvocations"
         ],
         Resource = "*"
       },
