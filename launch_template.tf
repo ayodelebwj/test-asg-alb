@@ -22,6 +22,7 @@ echo "OK" > /var/www/html/health
 sudo snap install amazon-ssm-agent --classic
 sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
+chown ubuntu:ubuntu /home/ubuntu
 sleep 10
 EOF
   )
@@ -96,7 +97,7 @@ systemctl start backend-app
 sudo snap install amazon-ssm-agent --classic
 sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
-chown -R ubuntu:ubuntu /home/ubuntu/class25-26-project2
+chown ubuntu:ubuntu /home/ubuntu
 sleep 10
 EOF
 )
