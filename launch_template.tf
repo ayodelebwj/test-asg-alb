@@ -24,7 +24,7 @@ sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
 EOF
   )
-  
+
   tag_specifications {
     resource_type = "instance"
 
@@ -60,8 +60,6 @@ apt install -y python3.12-venv python3-pip git
 # clone repo
 cd /home/ubuntu
 git clone https://github.com/techbleat/class25-26-project2.git
-chown ubuntu:ubuntu /home/ubuntu/class25-26-project2
-
 
 # create virtual environment
 python3 -m venv /home/ubuntu/class25-26-project2/venv
@@ -97,6 +95,7 @@ systemctl start backend-app
 sudo snap install amazon-ssm-agent --classic
 sudo systemctl enable snap.amazon-ssm-agent.amazon-ssm-agent.service
 sudo systemctl start snap.amazon-ssm-agent.amazon-ssm-agent.service
+chown -R ubuntu:ubuntu /home/ubuntu/class25-26-project2
 EOF
 )
   tag_specifications {
