@@ -66,8 +66,9 @@ jobs:
       - name: Get Role ARN Output
         id: tf
         run: |
-         echo "role_arn=$(terraform output -raw github_actions_role)" >> $GITHUB_OUTPUT
-
+         ROLE_ARN=$(terraform output -raw github_actions_role | tr -d '\n')
+         echo "role_arn=$ROLE_ARN" >> "$GITHUB_OUTPUT"
+         
   ansible_configuration:
     runs-on: ubuntu-latest
     needs: [terraform]
