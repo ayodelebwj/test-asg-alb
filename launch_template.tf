@@ -55,7 +55,7 @@ user_data = base64encode(<<EOF
 
 # install python and dependencies
 apt update -y
-apt install -y python3.12-venv python3-pip git
+apt install -y python3 python3-venv python3-pip git
 
 # clone repo
 cd /home/ubuntu
