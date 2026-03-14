@@ -10,6 +10,7 @@ resource "aws_launch_template" "frontend_lt" {
   user_data = base64encode(<<EOF
 #!/bin/bash
 apt update -y
+apt install -y python3
 apt install -y nginx
 systemctl start nginx
 systemctl enable nginx
@@ -47,6 +48,7 @@ user_data = base64encode(<<EOF
 
 # install python and dependencies
 apt update -y
+apt install -y python3
 apt install -y python3.12-venv python3-pip git
 
 # clone repo
