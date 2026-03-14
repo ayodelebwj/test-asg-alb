@@ -65,7 +65,7 @@ jobs:
          
       - name: Get Role ARN Output
         id: tf
-        run: 
+        run: |
          echo "role_arn=$(terraform output -raw github_actions_role)" >> $GITHUB_OUTPUT
 
   ansible_configuration:
@@ -111,4 +111,3 @@ jobs:
 
       - name: run ansible playbook
         run: ansible-playbook -i aws_ec2.yml ping.yml -vvv
-      
